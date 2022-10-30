@@ -1,0 +1,33 @@
+{
+    "name": "hulang/think-social",
+    "description": "The ThinkPHP6.1 social Package",
+    "keywords": ["第三方授权登录","QQ登录","微信登录","新浪登录","百度登录","谷歌登录","Google登录","Facebook登录","Gitee登录","Github登录","Oschina登录","淘宝登录","抖音登录","小米登录","钉钉登录","think-social","thinkphp-social","oauth", "thinkphp","thinkphp6.1"],
+    "license": "Apache-2.0",
+    "type": "think-extend",
+    "require": {
+        "php": ">=7.2.5",
+        "topthink/think-installer": "^2.0",
+        "topthink/framework": "^6.1.0"
+    },
+    "authors": [
+        {
+            "name": "hulang",
+            "email": "974829947@qq.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4" : {
+            "hulang\\social\\" : "src/"
+        }
+    },
+    "extra": {
+        "think-config": {
+            "social": "src/config/config.php"
+        },
+        "think": {
+            "config": {
+                "social": "src/config/config.php"
+            }
+        }
+    }
+}

@@ -27,7 +27,7 @@
     "type": "thinkphp6-extend",
     "require": {
         "php": ">=7.2.5",
-        "topthink/framework": "^6.1.0",
+        "topthink/framework": "^6.0",
         "topthink/think-installer": "^2.0"
     },
     "authors": [

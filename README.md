@@ -1,5 +1,9 @@
-## think-social
-适用于thinkphp6.1的社会化登录扩展
+## thinkphp6.1+ 社会化登录扩展扩展包
+
+### 环境
+
+1. php >= 7.2.5
+2. thinkphp >=6.1
 
 目前已支持：QQ、微信、新浪、百度、Gitee、Github、Oschina、Google、Facebook、淘宝、抖音、小米、钉钉
 
@@ -8,7 +12,8 @@
 composer require hulang/think-social
 ```
 
-# 配置Config信息
+## 配置Config信息
+
 ```php
 // 安装之后会在config目录里自动生成social.php配置文件
 <?php

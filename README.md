@@ -1,9 +1,9 @@
-## thinkphp6.1+ 社会化登录扩展包
+## ThinkPHP 6.1+ 社会化登录扩展包
 
 ### 环境
 
-1. php >= 7.2.5
-2. thinkphp >=6.1
+- php >= 7.2.5
+- ThinkPHP >=6.1
 
 目前已支持：QQ、微信、新浪、百度、Gitee、Github、Oschina、Google、Facebook、淘宝、抖音、小米、钉钉
 
@@ -35,7 +35,7 @@ return [
 ```
 
 ## 用法示例
-````
+```html
 <a href="{:url('Oauth/login',['type'=>'qq'])}">QQ登录</a>
 <a href="{:url('Oauth/login',['type'=>'sina'])}">新浪微博登录</a>
 <a href="{:url('Oauth/login',['type'=>'weixin'])}">微信登录</a>

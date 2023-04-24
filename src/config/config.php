@@ -3,82 +3,22 @@
 declare(strict_types=1);
 
 return [
-    // 腾讯QQ|登录配置
+    // 腾讯QQ登录配置
     'qq' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
+        'app_id'        => '', //应用注册成功后分配的 APP ID
+        'app_secret'    => '',  //应用注册成功后分配的KEY
+        'scope'         => 'get_user_info',
     ],
-    // 微信扫码|登录配置
+    // 微信扫码登录配置
     'weixin' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
+        'app_id'        => '', //应用注册成功后分配的 APP ID
+        'app_secret'    => '',  //应用注册成功后分配的KEY
+        'scope'         => 'snsapi_userinfo', // 如果需要静默授权,这里改成:snsapi_base,扫码登录系统会自动改为:snsapi_login
     ],
-    // 新浪|登录配置
+    // 新浪登录配置
     'sina' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
+        'app_id'        => '', //应用注册成功后分配的 APP ID
+        'app_secret'    => '',  //应用注册成功后分配的KEY
+        'scope'         => 'all',
     ],
-    // Baidu|登录配置
-    'baidu' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Gitee|登录配置
-    'gitee' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Github|登录配置
-    'github' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Google|登录配置
-    'google' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Facebook|登录配置
-    'facebook' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Oschina|登录配置
-    'oschina' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Taobao|登录配置
-    'taobao' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Douyin|登录配置
-    'douyin' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Xiaomi|登录配置
-    'xiaomi' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ],
-    // Dingtalk|登录配置
-    'dingtalk' => [
-        'app_key' => '', //应用注册成功后分配的 APP ID
-        'app_secret' => '',  //应用注册成功后分配的KEY
-        'callback' => '', // 应用回调地址
-    ]
 ];

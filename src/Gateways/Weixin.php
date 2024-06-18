@@ -8,8 +8,8 @@ use think\OAuth2\Connector\Gateway;
 
 class Weixin extends Gateway
 {
-    const API_BASE            = 'https://api.weixin.qq.com/sns/';
-    protected $AuthorizeURL   = 'https://open.weixin.qq.com/connect/qrconnect';
+    const API_BASE = 'https://api.weixin.qq.com/sns/';
+    protected $AuthorizeURL = 'https://open.weixin.qq.com/connect/qrconnect';
     protected $AccessTokenURL = 'https://api.weixin.qq.com/sns/oauth2/access_token';
     /**
      * 得到跳转地址
@@ -18,11 +18,11 @@ class Weixin extends Gateway
     {
         $this->switchAccessTokenURL();
         $params = [
-            'appid'         => $this->config['app_id'],
-            'redirect_uri'  => $this->config['callback'],
+            'appid' => $this->config['app_id'],
+            'redirect_uri' => $this->config['callback'],
             'response_type' => $this->config['response_type'],
-            'scope'         => $this->config['scope'],
-            'state'         => $this->config['state'],
+            'scope' => $this->config['scope'],
+            'state' => $this->config['state'],
         ];
         return $this->AuthorizeURL . '?' . http_build_query($params) . '#wechat_redirect';
     }
@@ -33,11 +33,11 @@ class Weixin extends Gateway
     public function getProxyURL()
     {
         $params = [
-            'appid'         => $this->config['app_id'],
+            'appid' => $this->config['app_id'],
             'response_type' => $this->config['response_type'],
-            'scope'         => $this->config['scope'],
-            'state'         => $this->config['state'],
-            'return_uri'    => $this->config['callback'],
+            'scope' => $this->config['scope'],
+            'state' => $this->config['state'],
+            'return_uri' => $this->config['callback'],
         ];
         return $this->config['proxy_url'] . '?' . http_build_query($params);
     }
@@ -48,7 +48,6 @@ class Weixin extends Gateway
     public function openid()
     {
         $this->getToken();
-
         if (isset($this->token['openid'])) {
             return $this->token['openid'];
         } else {
@@ -62,19 +61,17 @@ class Weixin extends Gateway
     public function userinfo()
     {
         $rsp = $this->userinfoRaw();
-
         $avatar = $rsp['headimgurl'];
         if ($avatar) {
             $avatar = \preg_replace('~\/\d+$~', '/0', $avatar);
         }
-
         $userinfo = [
-            'openid'  => $this->openid(),
+            'openid' => $this->openid(),
             'unionid' => isset($this->token['unionid']) ? $this->token['unionid'] : '',
             'channel' => 'weixin',
-            'nick'    => $rsp['nickname'],
-            'gender'  => $this->getGender($rsp['sex']),
-            'avatar'  => $avatar,
+            'nick' => $rsp['nickname'],
+            'gender' => $this->getGender($rsp['sex']),
+            'avatar' => $avatar,
         ];
         return $userinfo;
     }
@@ -85,7 +82,6 @@ class Weixin extends Gateway
     public function userinfoRaw()
     {
         $this->getToken();
-
         return $this->call('userinfo');
     }
 
@@ -100,11 +96,9 @@ class Weixin extends Gateway
     private function call($api, $params = [], $method = 'GET')
     {
         $method = strtoupper($method);
-
         $params['access_token'] = $this->token['access_token'];
-        $params['openid']       = $this->openid();
-        $params['lang']         = 'zh_CN';
-
+        $params['openid'] = $this->openid();
+        $params['lang'] = 'zh_CN';
         $data = $this->$method(self::API_BASE . $api, $params);
         return json_decode($data, true);
     }
@@ -132,10 +126,10 @@ class Weixin extends Gateway
     protected function accessTokenParams()
     {
         $params = [
-            'appid'      => $this->config['app_id'],
-            'secret'     => $this->config['app_secret'],
+            'appid' => $this->config['app_id'],
+            'secret' => $this->config['app_secret'],
             'grant_type' => $this->config['grant_type'],
-            'code'       => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
+            'code' => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
         ];
         return $params;
     }

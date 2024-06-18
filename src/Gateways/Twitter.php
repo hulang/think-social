@@ -69,13 +69,12 @@ class Twitter extends Gateway
     public function userinfo()
     {
         $data = $this->userinfoRaw();
-
         $return = [
-            'openid'  => $data['id_str'],
+            'openid' => $data['id_str'],
             'channel' => 'twitter',
-            'nick'    => $data['name'],
-            'gender'  => 'n', //twitter不返回用户性别
-            'avatar'  => $data['profile_image_url_https'],
+            'nick' => $data['name'],
+            'gender' => 'n', //twitter不返回用户性别
+            'avatar' => $data['profile_image_url_https'],
         ];
         return $return;
     }
@@ -93,7 +92,6 @@ class Twitter extends Gateway
                 throw new \Exception("获取Twitter ACCESS_TOKEN 出错：" . json_encode($this->token));
             }
         }
-
         return $this->call('1.1/users/show.json', $this->token, 'GET', true);
     }
 
@@ -110,13 +108,11 @@ class Twitter extends Gateway
         $method  = strtoupper($method);
         $request = [
             'method' => $method,
-            'uri'    => self::API_BASE . $api,
+            'uri' => self::API_BASE . $api,
         ];
         $oauthParams                    = $this->getOAuthParams($params);
         $oauthParams['oauth_signature'] = $this->signature($request, $oauthParams);
-
         $headers = ['Authorization' => $this->getAuthorizationHeader($oauthParams)];
-
         $data = $this->$method($request['uri'], $params, $headers);
         if ($isJson) {
             return json_decode($data, true);
@@ -134,12 +130,12 @@ class Twitter extends Gateway
     private function getOAuthParams($params = [])
     {
         $_default = [
-            'oauth_consumer_key'     => $this->config['app_id'],
-            'oauth_nonce'            => Str::random(),
+            'oauth_consumer_key' => $this->config['app_id'],
+            'oauth_nonce' => Str::random(),
             'oauth_signature_method' => 'HMAC-SHA1',
-            'oauth_timestamp'        => $this->timestamp,
-            'oauth_token'            => '',
-            'oauth_version'          => '1.0',
+            'oauth_timestamp' => $this->timestamp,
+            'oauth_token' => '',
+            'oauth_version' => '1.0',
         ];
         return array_merge($_default, $params);
     }
@@ -157,7 +153,6 @@ class Twitter extends Gateway
         $sign_str = Str::buildParams($params, true);
         $sign_str = $request['method'] . '&' . rawurlencode($request['uri']) . '&' . rawurlencode($sign_str);
         $sign_key = $this->config['app_secret'] . '&' . $this->tokenSecret;
-
         return rawurlencode(base64_encode(hash_hmac('sha1', $sign_str, $sign_key, true)));
     }
 

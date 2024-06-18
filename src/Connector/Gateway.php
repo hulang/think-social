@@ -41,22 +41,34 @@ abstract class Gateway implements GatewayInterface
      */
     protected $checkState = false;
 
+    /**
+     * 构造函数
+     * 
+     * 用于初始化OAuth2.0客户端的配置.在实例化客户端时,必须传入配置信息,以确保客户端能够正确进行认证流程
+     * 如果没有传入配置信息,将抛出一个异常,强调配置信息的必要性
+     * 
+     * @param array $config 配置数组,包含OAuth2.0客户端所需的各项配置参数
+     * @throws \Exception 如果没有传入配置信息,抛出异常
+     */
     public function __construct($config = null)
     {
+        // 检查是否传入了配置信息
         if (!$config) {
             throw new \Exception('传入的配置不能为空');
         }
-        //默认参数
+        // 默认配置参数,包含一些必要的OAuth2.0参数
         $_config = [
-            'app_id'        => '',
-            'app_secret'    => '',
-            'callback'      => '',
+            'app_id' => '',
+            'app_secret' => '',
+            'callback' => '',
             'response_type' => 'code',
-            'grant_type'    => 'authorization_code',
-            'proxy'         => '',
-            'state'         => '',
+            'grant_type' => 'authorization_code',
+            'proxy' => '',
+            'state' => '',
         ];
-        $this->config    = array_merge($_config, $config);
+        // 将传入的配置信息与默认配置合并,形成最终的配置
+        $this->config = array_merge($_config, $config);
+        // 记录当前时间,用于后续可能的时间相关操作
         $this->timestamp = time();
     }
 
@@ -93,7 +105,7 @@ abstract class Gateway implements GatewayInterface
      */
     protected function GET($url, $params = [], $headers = [])
     {
-        $client   = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $url, ['proxy' => $this->config['proxy'], 'headers' => $headers, 'query' => $params]);
         return $response->getBody()->getContents();
     }
@@ -108,7 +120,7 @@ abstract class Gateway implements GatewayInterface
      */
     protected function POST($url, $params = [], $headers = [])
     {
-        $client   = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         $response = $client->request('POST', $url, ['proxy' => $this->config['proxy'], 'headers' => $headers, 'form_params' => $params, 'http_errors' => false]);
         return $response->getBody()->getContents();
     }
@@ -120,11 +132,11 @@ abstract class Gateway implements GatewayInterface
     protected function accessTokenParams()
     {
         $params = [
-            'client_id'     => $this->config['app_id'],
+            'client_id' => $this->config['app_id'],
             'client_secret' => $this->config['app_secret'],
-            'grant_type'    => $this->config['grant_type'],
-            'code'          => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
-            'redirect_uri'  => $this->config['callback'],
+            'grant_type' => $this->config['grant_type'],
+            'code' => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
+            'redirect_uri' => $this->config['callback'],
         ];
         return $params;
     }

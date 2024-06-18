@@ -51,7 +51,7 @@ composer require hulang/think-social
 
 ### 公共方法
 
-在接口文件中，定义了 4 个方法，是每个第三方基类都必须实现的，用于相关的第三方登录操作和获取数据。方法名如下：
+在接口文件中,定义了 4 个方法,是每个第三方基类都必须实现的,用于相关的第三方登录操作和获取数据。方法名如下：
 
 ```php
     /**
@@ -75,7 +75,7 @@ composer require hulang/think-social
     public function userinfoRaw();
 ```
 
-微信有一个额外的方法，用于获取代理请求的地址
+微信有一个额外的方法,用于获取代理请求的地址
 
 ```php
     /**
@@ -86,7 +86,7 @@ composer require hulang/think-social
 
 ### 典型用法
 
-以 ThinkPHP5 为例
+以 `ThinkPHP`5/6/8 为例
 
 ```php
 <?php
@@ -101,9 +101,9 @@ class Sns
     private $config;
 
     /**
-     * 第三方登录，执行跳转操作
+     * 第三方登录,执行跳转操作
      *
-     * @param string $name 第三方渠道名称，目前可用的为：weixin,qq,weibo,alipay,facebook,twitter,line,google
+     * @param string $name 第三方渠道名称,目前可用的为：weixin,qq,weibo,alipay,facebook,twitter,line,google
      */
     public function login($name)
     {
@@ -113,25 +113,25 @@ class Sns
         //设置回跳地址
         $this->config['callback'] = $this->makeCallback($name);
 
-        //可以设置代理服务器，一般用于调试国外平台
+        //可以设置代理服务器,一般用于调试国外平台
         $this->config['proxy'] = 'http://127.0.0.1:1080';
 
         /**
-         * 对于微博，如果登录界面要适用于手机，则需要设定->setDisplay('mobile')
+         * 对于微博,如果登录界面要适用于手机,则需要设定->setDisplay('mobile')
          *
-         * 对于微信，如果是公众号登录，则需要设定->setDisplay('mobile')，否则是WEB网站扫码登录
+         * 对于微信,如果是公众号登录,则需要设定->setDisplay('mobile'),否则是WEB网站扫码登录
          *
-         * 其他登录渠道的这个设置没有任何影响，为了统一，可以都写上
+         * 其他登录渠道的这个设置没有任何影响,为了统一,可以都写上
          */
         return redirect(OAuth::$name($this->config)->setDisplay('mobile')->getRedirectUrl());
 
         /**
-         * 如果需要微信代理登录，则需要：
+         * 如果需要微信代理登录,则需要：
          *
-         * 1.将wx_proxy.php放置在微信公众号设定的回调域名某个地址，如 http://www.abc.com/proxy/wx_proxy.php
-         * 2.config中加入配置参数proxy_url，地址为 http://www.abc.com/proxy/wx_proxy.php
+         * 1.将wx_proxy.php放置在微信公众号设定的回调域名某个地址,如 http://www.abc.com/proxy/wx_proxy.php
+         * 2.config中加入配置参数proxy_url,地址为 http://www.abc.com/proxy/wx_proxy.php
          *
-         * 然后获取跳转地址方法是getProxyURL，如下所示
+         * 然后获取跳转地址方法是getProxyURL,如下所示
          */
         $this->config['proxy_url'] = 'http://www.abc.com/proxy/wx_proxy.php';
         return redirect(OAuth::$name($this->config)->setDisplay('mobile')->getProxyURL());
@@ -168,15 +168,15 @@ class Sns
 }
 ```
 
-Line 和 Facebook 强制要求传递 state，如果你没有设置，则会传递随机值
+Line 和 Facebook 强制要求传递 state,如果你没有设置,则会传递随机值
 
-如果要验证 state，则在获取用户信息的时候要加上`->mustCheckState()`方法。
+如果要验证 state,则在获取用户信息的时候要加上`->mustCheckState()`方法。
 
 ```php
 $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
 ```
 
-> 注意，不是所有的平台都支持传递 state，请自行阅读官方文档
+> 注意,不是所有的平台都支持传递 state,请自行阅读官方文档
 
 ### 客户端登录
 
@@ -195,7 +195,7 @@ $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
         $config['oauth_token_secret'] = $this->request->param('oauth_token_secret', '');
         $config['user_id']            = $this->request->param('user_id', '');
         $config['screen_name']        = $this->request->param('screen_name', '');
-        //其他和web登录一样，要求客户端传递code过来即可，可以是post也可以是get方式
+        //其他和web登录一样,要求客户端传递code过来即可,可以是post也可以是get方式
 
         $snsInfo = OAuth::$platform($config)->userinfo();
         print_r($snsInfo);
@@ -209,7 +209,7 @@ $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
 ```
 'app_id'     => 'wxbc4113c******',
 'app_secret' => '4749970d284217d0a**********',
-'scope'      => 'snsapi_userinfo',//如果需要静默授权，这里改成snsapi_base，扫码登录系统会自动改为snsapi_login
+'scope'      => 'snsapi_userinfo',//如果需要静默授权,这里改成snsapi_base,扫码登录系统会自动改为snsapi_login
 ```
 
 #### 2.QQ
@@ -220,8 +220,8 @@ $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
 'scope'         => 'get_user_info',
 ```
 
-QQ 现在可以获取`unionid`了，详见: http://wiki.connect.qq.com/unionid%E4%BB%8B%E7%BB%8D
-只需要配置参数`$config['withUnionid'] = true`，默认不会请求获取 Unionid
+QQ 现在可以获取`unionid`了,详见: http://wiki.connect.qq.com/unionid%E4%BB%8B%E7%BB%8D
+只需要配置参数`$config['withUnionid'] = true`,默认不会请求获取 Unionid
 
 #### 3.微博
 
@@ -245,10 +245,10 @@ QQ 现在可以获取`unionid`了，详见: http://wiki.connect.qq.com/unionid%E
 ```
 'app_id'     => '2774925********',
 'app_secret' => '99bfc8ad35544d7***********',
-'scope'      => 'public_profile,user_gender',//user_gender需要审核，所以不一定能获取到
+'scope'      => 'public_profile,user_gender',//user_gender需要审核,所以不一定能获取到
 ```
 
-facebook 有个特殊的配置`$config['field']`，默认是`'id,name,gender,picture.width(400)'`，你可以根据需求参考官方文档自行选择要获取的用户信息
+facebook 有个特殊的配置`$config['field']`,默认是`'id,name,gender,picture.width(400)'`,你可以根据需求参考官方文档自行选择要获取的用户信息
 
 #### 6.Twitter
 
@@ -281,7 +281,7 @@ Array
     [openid] => 1047776979*******
     [channel] => google
     [nick] => Coeus Rowe
-    [gender] => m //twitter和line不会返回性别，所以这里是n，Facebook根据你的权限，可能也不会返回，所以也可能是n
+    [gender] => m //twitter和line不会返回性别,所以这里是n,Facebook根据你的权限,可能也不会返回,所以也可能是n
     [avatar] => https://lh6.googleusercontent.com/-iLps1iAjL8Q/AAAAAAAAAAI/AAAAAAAAAAA/Bu5l0EIquF0/photo.jpg
 )
 ```
@@ -290,4 +290,4 @@ Array
 
 ### 其他
 
-使用中如果有什么问题，请提交 issue，我会及时查看
+使用中如果有什么问题,请提交 issue,我会及时查看

@@ -9,8 +9,8 @@ use think\OAuth2\Helper\Str;
 
 class Facebook extends Gateway
 {
-    const API_BASE            = 'https://graph.facebook.com/v3.1/';
-    protected $AuthorizeURL   = 'https://www.facebook.com/v3.1/dialog/oauth';
+    const API_BASE = 'https://graph.facebook.com/v3.1/';
+    protected $AuthorizeURL = 'https://www.facebook.com/v3.1/dialog/oauth';
     protected $AccessTokenURL = 'https://graph.facebook.com/v3.1/oauth/access_token';
 
     /**
@@ -43,10 +43,10 @@ class Facebook extends Gateway
     {
         $params = [
             'response_type' => $this->config['response_type'],
-            'client_id'     => $this->config['app_id'],
-            'redirect_uri'  => $this->config['callback'],
-            'scope'         => $this->config['scope'],
-            'state'         => $this->config['state'] ?: Str::random(),
+            'client_id' => $this->config['app_id'],
+            'redirect_uri' => $this->config['callback'],
+            'scope' => $this->config['scope'],
+            'state' => $this->config['state'] ?: Str::random(),
         ];
         return $this->AuthorizeURL . '?' . http_build_query($params);
     }
@@ -68,12 +68,12 @@ class Facebook extends Gateway
         $rsp = $this->userinfoRaw();
 
         $userinfo = [
-            'openid'  => $rsp['id'],
+            'openid' => $rsp['id'],
             'channel' => 'facebook',
-            'nick'    => $rsp['name'],
-            'gender'  => $this->getGender($rsp), //不一定会返回
-            'avatar'  => $this->getAvatar($rsp),
-            'email'   => isset($rsp['email']) ? $rsp['email'] : '',
+            'nick' => $rsp['name'],
+            'gender' => $this->getGender($rsp), //不一定会返回
+            'avatar' => $this->getAvatar($rsp),
+            'email' => isset($rsp['email']) ? $rsp['email'] : '',
         ];
         return $userinfo;
     }
@@ -101,11 +101,9 @@ class Facebook extends Gateway
         $method  = strtoupper($method);
         $request = [
             'method' => $method,
-            'uri'    => self::API_BASE . $api,
+            'uri' => self::API_BASE . $api,
         ];
-
         $data = $this->$method($request['uri'], $params);
-
         return json_decode($data, true);
     }
 
@@ -116,10 +114,10 @@ class Facebook extends Gateway
     protected function accessTokenParams()
     {
         $params = [
-            'client_id'     => $this->config['app_id'],
+            'client_id' => $this->config['app_id'],
             'client_secret' => $this->config['app_secret'],
-            'code'          => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
-            'redirect_uri'  => $this->config['callback'],
+            'code' => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
+            'redirect_uri' => $this->config['callback'],
         ];
         return $params;
     }

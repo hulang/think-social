@@ -8,8 +8,8 @@ use think\OAuth2\Connector\Gateway;
 
 class Qq extends Gateway
 {
-    const API_BASE            = 'https://graph.qq.com/';
-    protected $AuthorizeURL   = 'https://graph.qq.com/oauth2.0/authorize';
+    const API_BASE = 'https://graph.qq.com/';
+    protected $AuthorizeURL = 'https://graph.qq.com/oauth2.0/authorize';
     protected $AccessTokenURL = 'https://graph.qq.com/oauth2.0/token';
 
     /**
@@ -42,11 +42,11 @@ class Qq extends Gateway
     {
         $params = [
             'response_type' => $this->config['response_type'],
-            'client_id'     => $this->config['app_id'],
-            'redirect_uri'  => $this->config['callback'],
-            'state'         => $this->config['state'],
-            'scope'         => $this->config['scope'],
-            'display'       => $this->display,
+            'client_id' => $this->config['app_id'],
+            'redirect_uri' => $this->config['callback'],
+            'state' => $this->config['state'],
+            'scope' => $this->config['scope'],
+            'display' => $this->display,
         ];
         return $this->AuthorizeURL . '?' . http_build_query($params);
     }
@@ -56,15 +56,12 @@ class Qq extends Gateway
      */
     public function openid()
     {
-
         $this->getToken();
-
         if (!isset($this->token['openid']) || !$this->token['openid']) {
-            $userID                 = $this->getOpenID();
+            $userID = $this->getOpenID();
             $this->token['openid']  = $userID['openid'];
             $this->token['unionid'] = isset($userID['unionid']) ? $userID['unionid'] : '';
         }
-
         return $this->token['openid'];
     }
 
@@ -74,19 +71,17 @@ class Qq extends Gateway
     public function userinfo()
     {
         $rsp = $this->userinfoRaw();
-
         $avatar = $rsp['figureurl_qq_2'] ?: $rsp['figureurl_qq_1'];
         if ($avatar) {
             $avatar = \preg_replace('~\/\d+$~', '/0', $avatar);
         }
-
         $userinfo = [
-            'openid'  => $openid = $this->openid(),
+            'openid' => $openid = $this->openid(),
             'unionid' => isset($this->token['unionid']) ? $this->token['unionid'] : '',
             'channel' => 'qq',
-            'nick'    => $rsp['nickname'],
-            'gender'  => $rsp['gender'] == "男" ? 'm' : 'f',
-            'avatar'  => $avatar,
+            'nick' => $rsp['nickname'],
+            'gender' => $rsp['gender'] == "男" ? 'm' : 'f',
+            'avatar' => $avatar,
         ];
         return $userinfo;
     }
@@ -110,14 +105,11 @@ class Qq extends Gateway
     private function call($api, $params = [], $method = 'GET')
     {
         $method = strtoupper($method);
-
-        $params['openid']             = $this->openid();
+        $params['openid'] = $this->openid();
         $params['oauth_consumer_key'] = $this->config['app_id'];
-        $params['access_token']       = $this->token['access_token'];
-        $params['format']             = 'json';
-
+        $params['access_token'] = $this->token['access_token'];
+        $params['format'] = 'json';
         $data = $this->$method(self::API_BASE . $api, $params);
-
         $ret = json_decode($data, true);
         if ($ret['ret'] != 0) {
             throw new \Exception("qq获取用户信息出错:" . $ret['msg']);
@@ -147,16 +139,14 @@ class Qq extends Gateway
     private function getOpenID()
     {
         $client = new \GuzzleHttp\Client();
-
         $query = ['access_token' => $this->token['access_token']];
         // 如果要获取unionid，先去申请：http://wiki.connect.qq.com/%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%8D%E9%A6%88
         if (isset($this->config['withUnionid']) && $this->config['withUnionid'] === true) {
             $query['unionid'] = 1;
         }
-
         $response = $client->request('GET', self::API_BASE . 'oauth2.0/me', ['query' => $query]);
-        $data     = $response->getBody()->getContents();
-        $data     = json_decode(trim(substr($data, 9), " );\n"), true);
+        $data = $response->getBody()->getContents();
+        $data = json_decode(trim(substr($data, 9), " );\n"), true);
         if (isset($data['openid'])) {
             return $data;
         } else {

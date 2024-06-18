@@ -8,9 +8,8 @@ use think\OAuth2\Connector\Gateway;
 
 class Weibo extends Gateway
 {
-
-    const API_BASE            = 'https://api.weibo.com/2/';
-    protected $AuthorizeURL   = 'https://api.weibo.com/oauth2/authorize';
+    const API_BASE = 'https://api.weibo.com/2/';
+    protected $AuthorizeURL = 'https://api.weibo.com/oauth2/authorize';
     protected $AccessTokenURL = 'https://api.weibo.com/oauth2/access_token';
 
     /**
@@ -20,11 +19,11 @@ class Weibo extends Gateway
     {
         $this->switchAccessTokenURL();
         $params = [
-            'client_id'    => $this->config['app_id'],
+            'client_id' => $this->config['app_id'],
             'redirect_uri' => $this->config['callback'],
-            'scope'        => $this->config['scope'],
-            'state'        => $this->config['state'],
-            'display'      => $this->display,
+            'scope' => $this->config['scope'],
+            'state' => $this->config['state'],
+            'display' => $this->display,
         ];
         return $this->AuthorizeURL . '?' . http_build_query($params);
     }
@@ -35,7 +34,6 @@ class Weibo extends Gateway
     public function openid()
     {
         $this->getToken();
-
         if (isset($this->token['openid'])) {
             return $this->token['openid'];
         } else {
@@ -49,13 +47,12 @@ class Weibo extends Gateway
     public function userinfo()
     {
         $rsp = $this->userinfoRaw();
-
         $userinfo = [
-            'openid'  => $this->openid(),
+            'openid' => $this->openid(),
             'channel' => 'weibo',
-            'nick'    => $rsp['screen_name'],
-            'gender'  => $rsp['gender'],
-            'avatar'  => $rsp['avatar_hd'],
+            'nick' => $rsp['screen_name'],
+            'gender' => $rsp['gender'],
+            'avatar' => $rsp['avatar_hd'],
         ];
         return $userinfo;
     }
@@ -66,7 +63,6 @@ class Weibo extends Gateway
     public function userinfoRaw()
     {
         $this->getToken();
-
         return $this->call('users/show.json', ['uid' => $this->openid()]);
     }
 
@@ -81,9 +77,7 @@ class Weibo extends Gateway
     private function call($api, $params = [], $method = 'GET')
     {
         $method = strtoupper($method);
-
         $params['access_token'] = $this->token['access_token'];
-
         $data = $this->$method(self::API_BASE . $api, $params);
         return json_decode($data, true);
     }

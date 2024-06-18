@@ -9,8 +9,8 @@ use think\OAuth2\Helper\Str;
 
 class Line extends Gateway
 {
-    const API_BASE            = 'https://api.line.me/v2/';
-    protected $AuthorizeURL   = 'https://access.line.me/oauth2/v2.1/authorize';
+    const API_BASE = 'https://api.line.me/v2/';
+    protected $AuthorizeURL = 'https://access.line.me/oauth2/v2.1/authorize';
     protected $AccessTokenURL = 'https://api.line.me/oauth2/v2.1/token';
 
     /**
@@ -43,10 +43,10 @@ class Line extends Gateway
     {
         $params = [
             'response_type' => $this->config['response_type'],
-            'client_id'     => $this->config['app_id'],
-            'redirect_uri'  => $this->config['callback'],
-            'scope'         => $this->config['scope'],
-            'state'         => $this->config['state'] ?: Str::random(),
+            'client_id' => $this->config['app_id'],
+            'redirect_uri' => $this->config['callback'],
+            'scope' => $this->config['scope'],
+            'state' => $this->config['state'] ?: Str::random(),
         ];
         return $this->AuthorizeURL . '?' . http_build_query($params);
     }
@@ -66,13 +66,12 @@ class Line extends Gateway
     public function userinfo()
     {
         $rsp = $this->userinfoRaw();
-
         $userinfo = [
-            'openid'  => $rsp['userId'],
+            'openid' => $rsp['userId'],
             'channel' => 'line',
-            'nick'    => $rsp['displayName'],
-            'gender'  => 'n', //line不返回性别信息
-            'avatar'  => isset($rsp['pictureUrl']) ? $rsp['pictureUrl'] . '/large' : '',
+            'nick' => $rsp['displayName'],
+            'gender' => 'n', // line不返回性别信息
+            'avatar' => isset($rsp['pictureUrl']) ? $rsp['pictureUrl'] . '/large' : '',
         ];
         return $userinfo;
     }
@@ -83,9 +82,7 @@ class Line extends Gateway
     public function userinfoRaw()
     {
         $this->getToken();
-
         $data = $this->call('profile', $this->token, 'GET');
-
         if (isset($data['error'])) {
             throw new \Exception($data['error_description']);
         }
@@ -102,16 +99,13 @@ class Line extends Gateway
      */
     private function call($api, $params = [], $method = 'GET')
     {
-        $method  = strtoupper($method);
+        $method = strtoupper($method);
         $request = [
             'method' => $method,
-            'uri'    => self::API_BASE . $api,
+            'uri' => self::API_BASE . $api,
         ];
-
         $headers = ['Authorization' => (isset($this->token['token_type']) ? $this->token['token_type'] : 'Bearer') . ' ' . $this->token['access_token']];
-
         $data = $this->$method($request['uri'], $params, $headers);
-
         return json_decode($data, true);
     }
 

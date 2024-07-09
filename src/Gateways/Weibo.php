@@ -9,6 +9,7 @@ use think\OAuth2\Connector\Gateway;
 class Weibo extends Gateway
 {
     const API_BASE = 'https://api.weibo.com/2/';
+
     protected $AuthorizeURL = 'https://api.weibo.com/oauth2/authorize';
     protected $AccessTokenURL = 'https://api.weibo.com/oauth2/access_token';
 

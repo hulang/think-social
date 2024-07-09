@@ -64,7 +64,7 @@ class Google extends Gateway
      */
     public function userinfo()
     {
-        $rsp      = $this->userinfoRaw();
+        $rsp = $this->userinfoRaw();
         $userinfo = [
             'openid' => $rsp['id'],
             'channel' => 'google',

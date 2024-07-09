@@ -11,6 +11,7 @@ class Weixin extends Gateway
     const API_BASE = 'https://api.weixin.qq.com/sns/';
     protected $AuthorizeURL = 'https://open.weixin.qq.com/connect/qrconnect';
     protected $AccessTokenURL = 'https://api.weixin.qq.com/sns/oauth2/access_token';
+
     /**
      * 得到跳转地址
      */

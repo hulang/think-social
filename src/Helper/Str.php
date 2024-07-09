@@ -48,6 +48,7 @@ class Str
         // 移除最后一个"&",得到最终的参数字符串
         return rtrim($param_str, '&');
     }
+
     /**
      * 生成随机字符串
      * 
@@ -64,6 +65,7 @@ class Str
         // 打乱字符串池中的字符顺序,并返回指定长度的子字符串
         return substr(str_shuffle($str_pol), 0, $length);
     }
+
     /**
      * 获取客户端IP地址
      * 

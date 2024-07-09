@@ -33,6 +33,7 @@ class WxProxy
             header('Location: ' . $this->AuthorizeURL . '?' . http_build_query($params) . '#wechat_redirect');
         }
     }
+
     /**
      * 检查当前请求是否通过HTTPS协议进行
      * 

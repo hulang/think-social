@@ -207,17 +207,17 @@ $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
 #### 1.微信
 
 ```
-'app_id'     => 'wxbc4113c******',
+'app_id' => 'wxbc4113c******',
 'app_secret' => '4749970d284217d0a**********',
-'scope'      => 'snsapi_userinfo',//如果需要静默授权,这里改成snsapi_base,扫码登录系统会自动改为snsapi_login
+'scope' => 'snsapi_userinfo',//如果需要静默授权,这里改成snsapi_base,扫码登录系统会自动改为snsapi_login
 ```
 
 #### 2.QQ
 
 ```
-'app_id'        => '1013****',
-'app_secret'    => '67c52bc284b32e7**********',
-'scope'         => 'get_user_info',
+'app_id' => '1013****',
+'app_secret' => '67c52bc284b32e7**********',
+'scope' => 'get_user_info',
 ```
 
 QQ 现在可以获取`unionid`了,详见: http://wiki.connect.qq.com/unionid%E4%BB%8B%E7%BB%8D
@@ -226,26 +226,26 @@ QQ 现在可以获取`unionid`了,详见: http://wiki.connect.qq.com/unionid%E4%
 #### 3.微博
 
 ```
-'app_id'     => '78734****',
+'app_id' => '78734****',
 'app_secret' => 'd8a00617469018d61c**********',
-'scope'      => 'all',
+'scope' => 'all',
 ```
 
 #### 4.支付宝
 
 ```
-'app_id'      => '2016052*******',
-'scope'       => 'auth_user',
+'app_id' => '2016052*******',
+'scope' => 'auth_user',
 'pem_private' => Env::get('ROOT_PATH') . 'pem/private.pem', // 你的私钥
-'pem_public'  => Env::get('ROOT_PATH') . 'pem/public.pem', // 支付宝公钥
+'pem_public' => Env::get('ROOT_PATH') . 'pem/public.pem', // 支付宝公钥
 ```
 
 #### 5.Facebook
 
 ```
-'app_id'     => '2774925********',
+'app_id' => '2774925********',
 'app_secret' => '99bfc8ad35544d7***********',
-'scope'      => 'public_profile,user_gender',//user_gender需要审核,所以不一定能获取到
+'scope' => 'public_profile,user_gender',//user_gender需要审核,所以不一定能获取到
 ```
 
 facebook 有个特殊的配置`$config['field']`,默认是`'id,name,gender,picture.width(400)'`,你可以根据需求参考官方文档自行选择要获取的用户信息
@@ -253,24 +253,24 @@ facebook 有个特殊的配置`$config['field']`,默认是`'id,name,gender,pictu
 #### 6.Twitter
 
 ```
-'app_id'     => '3nHCxZgcK1WpYV**********',
+'app_id' => '3nHCxZgcK1WpYV**********',
 'app_secret' => '2byVAPayMrG8LISjopwIMcJGy***************',
 ```
 
 #### 7.Line
 
 ```
-'app_id'     => '159******',
+'app_id' => '159******',
 'app_secret' => '1f19c98a61d148f2************',
-'scope'      => 'profile',
+'scope' => 'profile',
 ```
 
 #### 8.Google
 
 ```
-'app_id'     => '7682717*******************.apps.googleusercontent.com',
+'app_id' => '7682717*******************.apps.googleusercontent.com',
 'app_secret' => 'w0Kq-aYA***************',
-'scope'      => 'https://www.googleapis.com/auth/userinfo.profile',
+'scope' => 'https://www.googleapis.com/auth/userinfo.profile',
 ```
 
 ### 返回样例

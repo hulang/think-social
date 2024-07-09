@@ -11,21 +11,25 @@ interface GatewayInterface
 {
     /**
      * 得到跳转地址
+     * @return mixed
      */
     public function getRedirectUrl();
 
     /**
      * 获取当前授权用户的openid标识
+     * @return mixed
      */
     public function openid();
 
     /**
      * 获取格式化后的用户信息
+     * @return mixed
      */
     public function userinfo();
 
     /**
      * 获取原始接口返回的用户信息
+     * @return mixed
      */
     public function userinfoRaw();
 }

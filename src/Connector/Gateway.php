@@ -121,7 +121,12 @@ abstract class Gateway implements GatewayInterface
         // 创建GuzzleHttp客户端实例
         $client = new \GuzzleHttp\Client();
         // 发送GET请求,包括代理和头部信息在内的请求选项
-        $response = $client->request('GET', $url, ['proxy' => $this->config['proxy'], 'headers' => $headers, 'query' => $params]);
+        $options = [
+            'proxy' => $this->config['proxy'],
+            'headers' => $headers,
+            'query' => $params
+        ];
+        $response = $client->request('GET', $url, $options);
         // 获取并返回响应的主体内容
         return $response->getBody()->getContents();
     }
@@ -142,7 +147,13 @@ abstract class Gateway implements GatewayInterface
         // 创建GuzzleHttp客户端实例
         $client = new \GuzzleHttp\Client();
         // 发送POST请求,包括代理设置、请求头和表单参数
-        $response = $client->request('POST', $url, ['proxy' => $this->config['proxy'], 'headers' => $headers, 'form_params' => $params, 'http_errors' => false]);
+        $options = [
+            'proxy' => $this->config['proxy'],
+            'headers' => $headers,
+            'form_params' => $params,
+            'http_errors' => false
+        ];
+        $response = $client->request('POST', $url, $options);
         // 获取并返回响应的主体内容
         return $response->getBody()->getContents();
     }

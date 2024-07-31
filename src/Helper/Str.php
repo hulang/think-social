@@ -21,12 +21,12 @@ class Str
     }
     /**
      * 构建参数字符串
-     * 该方法用于将参数数组构建为一个查询字符串,可以选项是否对参数进行URL编码,以及排除某些参数.
+     * 该方法用于将参数数组构建为一个查询字符串,可以选项是否对参数进行URL编码,以及排除某些参数
      *
-     * @param array $params 参数数组,包含需要构建到字符串中的键值对.
-     * @param bool $urlencode 是否对参数值进行URL编码,默认为false表示不编码.
-     * @param array $except 一个数组,包含需要从参数字符串中排除的键名.
-     * @return string 返回构建好的参数字符串,参数之间用"&"分隔.
+     * @param array $params 参数数组,包含需要构建到字符串中的键值对
+     * @param bool $urlencode 是否对参数值进行URL编码,默认为false表示不编码
+     * @param array $except 一个数组,包含需要从参数字符串中排除的键名
+     * @return string 返回构建好的参数字符串,参数之间用'&'分隔
      */
     public static function buildParams($params, $urlencode = false, $except = ['sign'])
     {
@@ -42,10 +42,10 @@ class Str
             $param_str .= $k . '=';
             // 根据$urlencode参数值决定是否对参数值进行URL编码
             $param_str .= $urlencode ? rawurlencode($v) : $v;
-            // 连接下一个参数的前缀"&"
+            // 连接下一个参数的前缀'&'
             $param_str .= '&';
         }
-        // 移除最后一个"&",得到最终的参数字符串
+        // 移除最后一个'&',得到最终的参数字符串
         return rtrim($param_str, '&');
     }
 
@@ -61,7 +61,7 @@ class Str
     public static function random($length = 16)
     {
         // 定义包含所有可能字符的字符串池
-        $str_pol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        $str_pol = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
         // 打乱字符串池中的字符顺序,并返回指定长度的子字符串
         return substr(str_shuffle($str_pol), 0, $length);
     }
@@ -69,9 +69,10 @@ class Str
     /**
      * 获取客户端IP地址
      * 
-     * 本函数用于获取当前请求的客户端的IP地址.首先尝试从$_SERVER数组中获取REMOTE_ADDR键对应的值,
-     * 这是最直接的获取客户端IP的方式.如果该值不存在,则尝试通过getenv函数获取REMOTE_ADDR的环境变量值.
-     * 如果所有尝试都失败,函数将默认返回127.0.0.1,即本地回环地址.
+     * 本函数用于获取当前请求的客户端的IP地址
+     * 首先尝试从$_SERVER数组中获取REMOTE_ADDR键对应的值,这是最直接的获取客户端IP的方式
+     * 如果该值不存在,则尝试通过getenv函数获取REMOTE_ADDR的环境变量值
+     * 如果所有尝试都失败,函数将默认返回127.0.0.1,即本地回环地址
      * 
      * @return string 客户端的IP地址
      */

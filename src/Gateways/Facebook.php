@@ -140,7 +140,11 @@ class Facebook extends Gateway
         // 根据配置确定请求的用户字段,如果未配置,则使用默认字段
         $fields = isset($this->config['fields']) ? $this->config['fields'] : 'id,name,gender,picture.width(400)';
         // 调用外部接口获取用户信息,使用GET方法,并传递访问令牌和请求的字段
-        return $this->call('me', ['access_token' => $this->token['access_token'], 'fields' => $fields], 'GET');
+        $params = [
+            'access_token' => $this->token['access_token'],
+            'fields' => $fields,
+        ];
+        return $this->call('me', $params, 'GET');
     }
 
     /**
@@ -227,7 +231,7 @@ class Facebook extends Gateway
      * 这样做的目的是为了统一性别表示方式,便于后续处理和使用
      * 
      * @param array $rsp 响应数据,期望其中包含'gender'键来指示性别
-     * @return mixed|string 返回性别代码：'m'代表男性,'f'代表女性,'n'代表未知(当响应数据中没有指定性别时)
+     * @return mixed|string 返回性别代码:'m'代表男性,'f'代表女性,'n'代表未知(当响应数据中没有指定性别时)
      */
     private function getGender($rsp)
     {

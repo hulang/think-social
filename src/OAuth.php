@@ -10,16 +10,16 @@ use think\OAuth2\Helper\Str;
 abstract class OAuth
 {
     /**
-     * 根据指定的网关名称初始化相应的网关实例.
+     * 根据指定的网关名称初始化相应的网关实例
      * 
-     * 该方法用于动态加载并初始化指定的第三方登录网关类.它首先通过网关名称构建类名,
-     * 然后检查该类是否存在且是否实现了GatewayInterface接口.如果条件满足,
-     * 则实例化该类并返回其对象；否则,抛出异常指出相应的类不存在或不实现正确的接口.
+     * 该方法用于动态加载并初始化指定的第三方登录网关类
+     * 它首先通过网关名称构建类名,然后检查该类是否存在且是否实现了GatewayInterface接口
+     * 如果条件满足,则实例化该类并返回其对象;否则,抛出异常指出相应的类不存在或不实现正确的接口
      * 
-     * @param string $gateway 网关名称,用于构建网关类名.
-     * @param array|null $config 网关配置数组,用于初始化网关类.
-     * @return GatewayInterface 实例化后的网关类对象,实现了GatewayInterface接口.
-     * @throws \Exception 如果网关类不存在或不实现GatewayInterface接口,则抛出异常.
+     * @param string $gateway 网关名称,用于构建网关类名
+     * @param array|null $config 网关配置数组,用于初始化网关类
+     * @return GatewayInterface 实例化后的网关类对象,实现了GatewayInterface接口
+     * @throws \Exception 如果网关类不存在或不实现GatewayInterface接口,则抛出异常
      */
     protected static function init($gateway, $config = null)
     {
@@ -45,11 +45,12 @@ abstract class OAuth
 
     /**
      * 静态方法调用的魔术方法
-     * 当尝试调用不存在的静态方法时,此方法会被调用.它设计用于作为入口点,初始化并返回特定的网关实例.
+     * 当尝试调用不存在的静态方法时,此方法会被调用
+     * 它设计用于作为入口点,初始化并返回特定的网关实例
      * 
-     * @param string $gateway 网关名称,用于指定要初始化的网关类.
-     * @param array $config 一个或多个配置参数,这些参数将传递给初始化方法.
-     * @return object 返回初始化后的网关对象.
+     * @param string $gateway 网关名称,用于指定要初始化的网关类
+     * @param array $config 一个或多个配置参数,这些参数将传递给初始化方法
+     * @return object 返回初始化后的网关对象
      */
     public static function __callStatic($gateway, $config)
     {

@@ -118,7 +118,7 @@ class Qq extends Gateway
         }
         // 格式化用户信息数组,包括openid、unionid、channel、nick、gender和avatar字段
         $userinfo = [
-            'openid' => $openid = $this->openid(),
+            'openid' => $this->openid(),
             'unionid' => isset($this->token['unionid']) ? $this->token['unionid'] : '',
             'channel' => 'qq',
             'nick' => $rsp['nickname'],
@@ -213,7 +213,7 @@ class Qq extends Gateway
         // 构建请求参数,包括访问令牌
         $query = ['access_token' => $this->token['access_token']];
         // 如果配置中要求获取UnionID,则添加到请求参数中
-        // 如果要获取unionid,先去申请：http://wiki.connect.qq.com/%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%8D%E9%A6%88
+        // 如果要获取unionid,先去申请:http://wiki.connect.qq.com/%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%8D%E9%A6%88
         if (isset($this->config['withUnionid']) && $this->config['withUnionid'] === true) {
             $query['unionid'] = 1;
         }

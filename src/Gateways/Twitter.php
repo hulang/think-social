@@ -48,7 +48,7 @@ class Twitter extends Gateway
         // 如果配置中存在oauth_token_secret,将其赋值给token数组和tokenSecret变量
         if (isset($this->config['oauth_token_secret']) && !empty($this->config['oauth_token_secret'])) {
             $this->token['oauth_token_secret'] = $this->config['oauth_token_secret'];
-            $this->tokenSecret                 = $this->config['oauth_token_secret'];
+            $this->tokenSecret = $this->config['oauth_token_secret'];
         }
         // 如果配置中存在user_id,将其赋值给token数组
         if (isset($this->config['user_id']) && !empty($this->config['user_id'])) {
@@ -141,7 +141,7 @@ class Twitter extends Gateway
                 $this->tokenSecret = $this->token['oauth_token_secret'];
             } else {
                 // 如果获取令牌过程中出错,抛出异常
-                throw new \Exception("获取Twitter ACCESS_TOKEN 出错：" . json_encode($this->token));
+                throw new \Exception("获取Twitter ACCESS_TOKEN 出错:" . json_encode($this->token));
             }
         }
         // 使用令牌发起请求,获取用户信息
@@ -274,7 +274,7 @@ class Twitter extends Gateway
     protected function getAccessToken()
     {
         // 使用POST方法调用'oauth/access_token'接口,参数来自$_GET全局数组
-        // 这里解释了为什么使用POST方法：因为按照OAuth协议的规定,获取访问令牌通常需要发送一些敏感信息,使用POST方法可以增加安全性
+        // 这里解释了为什么使用POST方法:因为按照OAuth协议的规定,获取访问令牌通常需要发送一些敏感信息,使用POST方法可以增加安全性
         return $this->call('oauth/access_token', $_GET, 'POST');
     }
 }

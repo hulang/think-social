@@ -26,8 +26,8 @@ composer require hulang/think-social
 
 ### 目录结构
 
-```
-.
+```sh
+
 ├── README.md                        说明文件
 ├── composer.json                    composer文件
 ├── src                              代码源文件目录
@@ -206,7 +206,7 @@ $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
 
 #### 1.微信
 
-```
+```php
 'app_id' => 'wxbc4113c******',
 'app_secret' => '4749970d284217d0a**********',
 'scope' => 'snsapi_userinfo',//如果需要静默授权,这里改成snsapi_base,扫码登录系统会自动改为snsapi_login
@@ -214,7 +214,7 @@ $snsInfo = OAuth::$name($this->config)->mustCheckState()->userinfo();
 
 #### 2.QQ
 
-```
+```php
 'app_id' => '1013****',
 'app_secret' => '67c52bc284b32e7**********',
 'scope' => 'get_user_info',
@@ -225,7 +225,7 @@ QQ 现在可以获取`unionid`了,详见: http://wiki.connect.qq.com/unionid%E4%
 
 #### 3.微博
 
-```
+```php
 'app_id' => '78734****',
 'app_secret' => 'd8a00617469018d61c**********',
 'scope' => 'all',
@@ -233,7 +233,7 @@ QQ 现在可以获取`unionid`了,详见: http://wiki.connect.qq.com/unionid%E4%
 
 #### 4.支付宝
 
-```
+```php
 'app_id' => '2016052*******',
 'scope' => 'auth_user',
 'pem_private' => Env::get('ROOT_PATH') . 'pem/private.pem', // 你的私钥
@@ -242,7 +242,7 @@ QQ 现在可以获取`unionid`了,详见: http://wiki.connect.qq.com/unionid%E4%
 
 #### 5.Facebook
 
-```
+```php
 'app_id' => '2774925********',
 'app_secret' => '99bfc8ad35544d7***********',
 'scope' => 'public_profile,user_gender',//user_gender需要审核,所以不一定能获取到
@@ -252,14 +252,14 @@ facebook 有个特殊的配置`$config['field']`,默认是`'id,name,gender,pictu
 
 #### 6.Twitter
 
-```
+```php
 'app_id' => '3nHCxZgcK1WpYV**********',
 'app_secret' => '2byVAPayMrG8LISjopwIMcJGy***************',
 ```
 
 #### 7.Line
 
-```
+```php
 'app_id' => '159******',
 'app_secret' => '1f19c98a61d148f2************',
 'scope' => 'profile',
@@ -267,7 +267,7 @@ facebook 有个特殊的配置`$config['field']`,默认是`'id,name,gender,pictu
 
 #### 8.Google
 
-```
+```php
 'app_id' => '7682717*******************.apps.googleusercontent.com',
 'app_secret' => 'w0Kq-aYA***************',
 'scope' => 'https://www.googleapis.com/auth/userinfo.profile',
@@ -275,7 +275,7 @@ facebook 有个特殊的配置`$config['field']`,默认是`'id,name,gender,pictu
 
 ### 返回样例
 
-```
+```php
 Array
 (
     [openid] => 1047776979*******

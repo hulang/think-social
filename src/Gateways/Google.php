@@ -157,7 +157,9 @@ class Google extends Gateway
         // 将请求方法转换为大写,确保一致性
         $method  = strtoupper($method);
         // 设置请求头,包含授权令牌
-        $headers = ['Authorization' => 'Bearer ' . $this->token['access_token']];
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->token['access_token'],
+        ];
         // 根据请求方法发送请求,并获取响应
         $data = $this->$method(self::API_BASE . $api, $params, $headers);
         // 解析JSON响应,并以数组形式返回
@@ -185,7 +187,7 @@ class Google extends Gateway
             return $data;
         } else {
             // 如果不包含访问令牌,则抛出异常,指出获取访问令牌失败
-            throw new \Exception("获取谷歌 ACCESS_TOKEN 出错：{$token}");
+            throw new \Exception("获取谷歌 ACCESS_TOKEN 出错:{$token}");
         }
     }
 

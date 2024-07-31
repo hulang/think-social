@@ -55,7 +55,7 @@ class Alipay extends Gateway
             return $this->token['openid'];
         } else {
             // 如果token中不包含openid,则抛出异常
-            throw new \Exception('没有获取到支付宝用户ID！');
+            throw new \Exception('没有获取到支付宝用户ID!');
         }
     }
 
@@ -113,7 +113,7 @@ class Alipay extends Gateway
      * 发起请求的私有方法
      * 
      * 该方法用于封装请求过程,支持不同的请求方法(如POST、GET),并自动处理签名及编码问题
-     * 主要包括以下几个步骤：
+     * 主要包括以下几个步骤:
      * 1. 根据传入的请求方法,转换为大写字母格式
      * 2. 构建请求的基本参数,包括app_id、method、charset、sign_type、timestamp、version及auth_token
      * 3. 将传入的参数与基本参数合并
@@ -277,7 +277,7 @@ class Alipay extends Gateway
             return $data;
         } else {
             // 如果不包含,抛出异常,说明获取access_token的过程中出现了错误
-            throw new \Exception("获取支付宝 ACCESS_TOKEN 出错：{$token}");
+            throw new \Exception("获取支付宝 ACCESS_TOKEN 出错:{$token}");
         }
     }
 }

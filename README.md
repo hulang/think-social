@@ -24,7 +24,7 @@
 composer require hulang/think-social
 ```
 
-# 配置`oauth`信息
+# `config/social.php`配置
 ```php
 <?php
 

@@ -19,11 +19,11 @@
     },
     "extra": {
         "think-config": {
-            "oauth": "src/config/config.php"
+            "social": "src/config/config.php"
         },
         "think": {
             "config": {
-                "oauth": "src/config/config.php"
+                "social": "src/config/config.php"
             }
         }
     }

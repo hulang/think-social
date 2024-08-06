@@ -1,6 +1,6 @@
 {
     "name": "hulang/think-social",
-    "description": "QQ 微信 新浪 百度 Gitee Github Oschina Google Facebook 淘宝 抖音 小米 钉钉 第三方登录",
+    "description": "baidu dingtalk douyin facebook gitee github google oschina qq sina taobao weixin xiaomi 第三方登录",
     "type": "library",
     "license": "MIT",
     "authors": [

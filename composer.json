@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "hulang\\OAuth2\\": "src"
+            "think\\OAuth2\\": "src"
         }
     },
     "extra": {

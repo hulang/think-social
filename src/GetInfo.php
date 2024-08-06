@@ -119,7 +119,7 @@ final class GetInfo
             $userInfo['sex'] = $data['sex'] == 1 ? '男' : '女';
             return $userInfo;
         } else {
-            throw new \Exception('获取Baidu用户信息失败');
+            throw new \Exception('获取百度用户信息失败');
         }
     }
 
@@ -169,7 +169,7 @@ final class GetInfo
             $userInfo['email'] = $data['email'];
             return $userInfo;
         } else {
-            throw new \Exception('获取Gitee用户信息失败');
+            throw new \Exception('获取Github用户信息失败');
         }
     }
 
@@ -245,7 +245,7 @@ final class GetInfo
             $userInfo['location'] = $data['location'];
             return $userInfo;
         } else {
-            throw new \Exception('获取Gitee用户信息失败');
+            throw new \Exception('获取OsChina用户信息失败');
         }
     }
 
@@ -324,7 +324,7 @@ final class GetInfo
     }
 
     /**
-     * Dingtalk用户信息
+     * 钉钉用户信息
      * @param array $token 请求参数
      * @return mixed|array
      * @throws \Exception

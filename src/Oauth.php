@@ -91,7 +91,7 @@ abstract class Oauth
         // 获取应用配置
         $config = config('social.' . $this->Type);
         if (empty($config['app_key']) || empty($config['app_secret'])) {
-            throw new \Exception('请配置' . $this->Type . '的app_key和app_secret');
+            throw new \Exception(sprintf('请配置%s的app_key和app_secret'), $this->Type);
         } else {
             $this->AppKey = $config['app_key'];
             $this->AppSecret = $config['app_secret'];
@@ -129,7 +129,7 @@ abstract class Oauth
             return new $class($token);
         } else {
             header('content-type:text/html;charset=utf-8');
-            throw new \Exception('暂时还不支持该' . $name . '的扩展');
+            throw new \Exception(sprintf('暂时还不支持该%s的扩展', $name));
         }
     }
 

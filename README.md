@@ -24,10 +24,8 @@
 composer require hulang/think-social
 ```
 
-# 配置Config信息
+# 配置`oauth`信息
 ```php
-// 安装之后会在config目录里自动生成social.php配置文件
-<?php
 <?php
 
 declare(strict_types=1);

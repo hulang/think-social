@@ -34,14 +34,14 @@ class Xiaomi extends Oauth
 
     /**
      * 组装接口调用参数 并调用接口
-     * @param string $api Xiaomi API
+     * @param string $api 小米 API
      * @param string $param 调用API的额外参数
      * @param string $method HTTP请求方法 默认为GET
      * @return mixed|array|json
      */
     public function call($api, $param = '', $method = 'GET', $multi = false)
     {
-        /* Xiaomi 调用公共参数 */
+        /* 小米 调用公共参数 */
         $params = [
             'token' => $this->Token['access_token'],
             'clientId' => $this->AppKey
@@ -64,7 +64,7 @@ class Xiaomi extends Oauth
             $data['openid'] = $this->openid();
             return $data;
         } else {
-            throw new \Exception('获取 Xiaomi ACCESS_TOKEN出错:未知错误');
+            throw new \Exception('获取 小米 ACCESS_TOKEN出错:未知错误');
         }
     }
 
@@ -87,7 +87,7 @@ class Xiaomi extends Oauth
                 return $this->unionid();
             }
         } else {
-            throw new \Exception('没有获取到 Xiaomi 用户openid!');
+            throw new \Exception('没有获取到 小米 用户openid!');
         }
     }
 
@@ -103,7 +103,7 @@ class Xiaomi extends Oauth
         if (isset($data['unionId'])) {
             return $data['unionId'];
         } else {
-            throw new \Exception('没有获取到 Xiaomi 用户unionid!');
+            throw new \Exception('没有获取到 小米 用户unionid!');
         }
     }
 }

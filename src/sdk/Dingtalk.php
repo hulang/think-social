@@ -42,7 +42,7 @@ class Dingtalk extends Oauth
     public function call($api, $param = '', $method = 'POST', $multi = false)
     {
         $time = $this->getMicrotime();
-        // 根据timestamp, appSecret计算签名值
+        // 根据timestamp,appSecret计算签名值
         $s = hash_hmac('sha256', $time, $this->AppSecret, true);
         $signature = base64_encode($s);
         $urlencode_signature = urlencode($signature);
@@ -176,7 +176,7 @@ class Dingtalk extends Oauth
         if (isset($data['unionid'])) {
             return $data['unionid'];
         } else {
-            throw new \Exception('没有获取到 Dingtalk 用户unionid!');
+            throw new \Exception('没有获取到 钉钉 用户unionid!');
         }
     }
 }

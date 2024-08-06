@@ -138,7 +138,7 @@ abstract class Oauth
      */
     protected function config()
     {
-        $config = config("social.{$this->Type}");
+        $config = config('social.' . $this->Type);
         if (!empty($config['authorize'])) {
             $this->Authorize = $config['authorize'];
         }

@@ -152,7 +152,7 @@ class Oauth
             $this->error('参数错误');
         }
         // 获取对象实例
-        $sns = \think\OAuth2\Oauth::getInstance($type);
+        $sns = \think\OAuth2\Social::getInstance($type);
         // 设置回跳地址
         $sns['Callback'] = $this->makeCallback($type);
         // 跳转到授权页面
@@ -165,7 +165,7 @@ class Oauth
         if ($type == null || $code == null) {
             $this->error('参数错误');
         }
-        $sns = \think\OAuth2\Oauth::getInstance($type);
+        $sns = \think\OAuth2\Social::getInstance($type);
         // 获取TOKEN
         $token = $sns->getAccessToken($code);
         //获取当前第三方登录用户信息

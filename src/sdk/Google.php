@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace think\OAuth2\sdk;
 
-use think\OAuth2\Oauth;
+use think\OAuth2\Social;
 
-class Google extends Oauth
+class Google extends Social
 {
     /**
      * 获取requestCode的api接口
